@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Web Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 100px 20px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Profile Section */
+        .profile-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .profile-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #764ba2;
+            margin-bottom: 1rem;
+        }
+
+        .bio {
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #555;
+        }
+
+        /* Skills Tags */
+        .skills {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9ff;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -42px;
+            top: 25px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-year {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-subtitle {
+            color: #764ba2;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-card:hover .portfolio-img::after {
+            opacity: 1;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-desc {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: #667eea;
+            border: 1px solid #e0e0e0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <ul>
+            <li><a href="#profil" class="nav-link">Profil</a></li>
+            <li><a href="#pendidikan" class="nav-link">Pendidikan</a></li>
+            <li><a href="#organisasi" class="nav-link">Organisasi</a></li>
+            <li><a href="#portofolio" class="nav-link">Portofolio</a></li>
+        </ul>
+    </nav>
+
+    <!-- Profile Section -->
+    <section id="profil">
+        <div class="container">
+            <div class="profile-content">
+                <div class="profile-img">👨‍💻</div>
+                <div class="profile-info">
+                    <h1>Ahmad Rizki Pratama</h1>
+                    <p class="subtitle">Web Developer | UI/UX Enthusiast</p>
+                    <p class="bio">
+                        Mahasiswa Teknik Informatika yang passionate dalam pengembangan web modern. 
+                        Memiliki pengalaman dalam membuat website responsif dan interaktif menggunakan 
+                        teknologi terkini. Aktif dalam organisasi kampus dan selalu antusias untuk 
+                        belajar teknologi baru.
+                    </p>
+                    <div class="contact-info">
+                        <div class="contact-item">📧 Email: ahmadrizki@email.com</div>
+                        <div class="contact-item">📱 Phone: +62 812-3456-7890</div>
+                        <div class="contact-item">📍 Lokasi: Jakarta, Indonesia</div>
+                        <div class="contact-item">🔗 LinkedIn: linkedin.com/in/ahmadrizki</div>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="pendidikan">
+        <div class="container">
+            <h2>Pendidikan</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2022 - Sekarang</div>
+                    <div class="timeline-title">Universitas Teknologi Indonesia</div>
+                    <div class="timeline-subtitle">S1 Teknik Informatika</div>
+                    <p class="timeline-desc">
+                        IPK: 3.75 / 4.00<br>
+                        Fokus studi: Web Development, Database Management, dan Software Engineering<br>
+                        Mata kuliah relevan: Pemrograman Web, Basis Data, Algoritma & Struktur Data, 
+                        Interaksi Manusia dan Komputer
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2019 - 2022</div>
+                    <div class="timeline-title">SMA Negeri 5 Jakarta</div>
+                    <div class="timeline-subtitle">Jurusan IPA</div>
+                    <p class="timeline-desc">
+                        Rata-rata nilai: 88/100<br>
+                        Aktif dalam ekstrakurikuler Robotika dan Komputer
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organization Section -->
+    <section id="organisasi">
+        <div class="container">
+            <h2>Pengalaman Organisasi</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2023 - Sekarang</div>
+                    <div class="timeline-title">Himpunan Mahasiswa Teknik Informatika</div>
+                    <div class="timeline-subtitle">Koordinator Divisi Media & Informasi</div>
+                    <p class="timeline-desc">
+                        • Mengelola website resmi himpunan dengan 1000+ pengunjung bulanan<br>
+                        • Membuat desain konten media sosial untuk kegiatan organisasi<br>
+                        • Mengkoordinir tim 5 orang dalam pembuatan sistem informasi akademik<br>
+                        • Bertanggung jawab atas dokumentasi dan publikasi 15+ kegiatan kampus
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2022 - 2023</div>
+                    <div class="timeline-title">Google Developer Student Clubs</div>
+                    <div class="timeline-subtitle">Core Team Member - Web Development</div>
+                    <p class="timeline-desc">
+                        • Mengadakan workshop web development untuk 50+ peserta<br>
+                        • Berkolaborasi dalam proyek pembuatan aplikasi untuk UMKM lokal<br>
+                        • Menjadi mentor dalam bootcamp coding selama 3 bulan<br>
+                        • Aktif dalam study group mingguan tentang teknologi web terkini
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-title">Panitia Seminar Nasional Teknologi</div>
+                    <div class="timeline-subtitle">Staff Divisi Website & Pendaftaran</div>
+                    <p class="timeline-desc">
+                        • Mengembangkan sistem pendaftaran online untuk 300+ peserta<br>
+                        • Membuat landing page event yang menarik dan informatif<br>
+                        • Mengelola database peserta dan sertifikat digital<br>
+                        • Memberikan support teknis selama acara berlangsung
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portofolio">
+        <div class="container">
+            <h2>Portofolio Website</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-card" onclick="openModal('modal1')">
+                    <div class="portfolio-img">🛒</div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">E-Commerce Fashion Store</h3>
+                        <p class="portfolio-desc">
+                            Platform e-commerce lengkap dengan sistem keranjang belanja, payment gateway, 
+                            dan admin dashboard untuk manajemen produk. Website responsive dengan 
+                            performa optimal dan UX yang intuitif.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Tailwind CSS</span>
+                            <span class="tech-tag">Redux</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" onclick="openModal('modal2')">
+                    <div class="portfolio-img">📚</div>
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Sistem Informasi Perpustakaan Digital</h3>
+                        <p class="portfolio-desc">
+                            Aplikasi web untuk manajemen perpustakaan digital dengan fitur peminjaman 
+                            online, katalog buku interaktif, dan sistem notifikasi otomatis. 
+                            Mendukung 500+ pengguna aktif.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h3 style="color: #667eea; margin-bottom: 1rem;">E-Commerce Fashion Store</h3>
+            <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; margin-bottom: 1rem;">
+                🛒
+            </div>
+            <p style="color: #666; line-height: 1.8; margin-bottom: 1rem;">
+                <strong>Deskripsi Project:</strong><br>
+                Platform e-commerce modern untuk fashion store dengan fitur lengkap meliputi katalog produk, 
+                filter pencarian, keranjang belanja, wishlist, payment gateway terintegrasi, tracking pesanan, 
+                dan admin dashboard komprehensif.
+            </p>
+            <p style="color: #666; line-height: 1.8; margin-bottom: 1rem;">
+                <strong>Fitur Utama:</strong><br>
+                • Authentication & Authorization dengan JWT<br>
+                • Real-time cart updates<br>
+                • Payment gateway integration (Midtrans)<br>
+                • Responsive design untuk semua device<br>
+                • Admin dashboard dengan analytics<br>
+                • Image optimization & lazy loading
+            </p>
+            <p style="color: #666; line-height: 1.8;">
+                <strong>Tech Stack:</strong> React.js, Node.js, Express, MongoDB, Tailwind CSS, Redux
+            </p>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h3 style="color: #667eea; margin-bottom: 1rem;">Sistem Informasi Perpustakaan Digital</h3>
+            <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; margin-bottom: 1rem;">
+                📚
+            </div>
+            <p style="color: #666; line-height: 1.8; margin-bottom: 1rem;">
+                <strong>Deskripsi Project:</strong><br>
+                Sistem manajemen perpustakaan digital yang memudahkan proses peminjaman buku, pengembalian, 
+                dan pencarian katalog. Dilengkapi dengan dashboard admin untuk monitoring dan reporting.
+            </p>
+            <p style="color: #666; line-height: 1.8; margin-bottom: 1rem;">
+                <strong>Fitur Utama:</strong><br>
+                • Katalog buku digital dengan search & filter<br>
+                • Sistem peminjaman online dengan QR code<br>
+                • Notifikasi email otomatis untuk reminder<br>
+                • Laporan statistik peminjaman<br>
+                • User management system<br>
+                • Responsive design untuk mobile access
+            </p>
+            <p style="color: #666; line-height: 1.8;">
+                <strong>Tech Stack:</strong> HTML5, CSS3, JavaScript, PHP, MySQL, Bootstrap
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '#667eea';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = '#764ba2';
+                }
+            });
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item, .portfolio-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
